@@ -1,0 +1,27 @@
+function [prob atlas cseg correct] = predict(atlas, prob, cseg)
+
+if labindex > 1
+    chart  = atlas.base_chart;
+    prcond = struct('x', chart.x, 'TS', chart.TS, ...
+                    's', chart.s, 'h', chart.R);
+    th     = atlas.cont.theta;
+    if th>=0.5 && th<=1
+      xp          = chart.x+(th*chart.R)*(chart.TS*chart.s);
+      [prob cseg] = CurveSegment.create(prob, chart, prcond, xp);
+      [prob ch2]  = cseg.update_TS(prob, cseg.curr_chart);
+      h           = chart.R*chart.TS'*ch2.TS;
+      xp          = chart.x+h*(ch2.TS*chart.s);
+      prcond      = struct('x', chart.x, 'TS', ch2.TS, ...
+                           's', chart.s, 'h', h);
+    else
+      xp          = chart.x+chart.R*(chart.TS*chart.s);
+    end
+    [prob cseg] = CurveSegment.create(prob, chart, prcond, xp);
+    correct     = true;
+else
+    [prob cseg] = CurveSegment.create_initial(prob, atlas.base_chart, false);
+    correct     = false;
+
+end
+
+end

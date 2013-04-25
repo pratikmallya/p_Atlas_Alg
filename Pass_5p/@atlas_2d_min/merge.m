@@ -1,0 +1,34 @@
+function [atlas cseg] = merge(atlas, cseg)
+
+chart        = cseg.ptlist{end};
+R            = atlas.cont.h;
+h            = atlas.cont.Rmarg*R;
+v            = @(i,ch) ch.x+h*(ch.TS*ch.s(:,i));
+nbfunc       = @(x) atlas.isneighbor(chart, x);
+close_charts = find(cellfun(nbfunc, atlas.charts));
+for k=close_charts
+  chartk          = atlas.charts{k}; 
+  vx  = arrayfun(@(i) v(i,chart), chart.bv, 'UniformOutput', false);
+  idx = cellfun(@(x) (norm(chartk.TS'*(x-chartk.x))<R), vx);
+  chart.bv(idx)   = [];
+  chart.nb        = [chart.nb, chartk.id];
+  vx  = arrayfun(@(i) v(i,chartk), chartk.bv, 'UniformOutput', false);
+  idx = cellfun(@(x) (norm(chart.TS'*(x-chart.x))<R), vx);
+  chartk.bv(idx)  = [];
+  chartk.nb       = [chartk.nb, chart.id];
+  atlas.charts{k} = chartk;
+end
+atlas.charts   = [atlas.charts, {chart}];
+atlas.boundary = [chart.id, atlas.boundary];
+atlas.bound_flag = [1, atlas.bound_flag];
+bd_charts      = atlas.charts(atlas.boundary);
+idx            = cellfun(@(x) ~isempty(x.bv), bd_charts);
+atlas.boundary = atlas.boundary(idx);
+atlas.bound_flag = atlas.bound_flag(idx);
+if isempty(atlas.boundary)
+  chart.pt_type    = 'EP';
+  chart.ep_flag    = 1;
+  cseg.ptlist{end} = chart;
+end
+
+end

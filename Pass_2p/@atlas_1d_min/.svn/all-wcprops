@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/cocotools/!svn/ver/2520/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min
+END
+init_atlas.m
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/cocotools/!svn/ver/2164/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/init_atlas.m
+END
+init_prcond.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/cocotools/!svn/ver/2116/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/init_prcond.m
+END
+add_chart.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/cocotools/!svn/ver/2350/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/add_chart.m
+END
+predict.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/cocotools/!svn/ver/2160/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/predict.m
+END
+atlas_1d_min.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/cocotools/!svn/ver/2390/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/atlas_1d_min.m
+END
+get_settings.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/cocotools/!svn/ver/2160/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/get_settings.m
+END
+flush.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/cocotools/!svn/ver/2387/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/flush.m
+END
+refine_step.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/cocotools/!svn/ver/2520/coco/tests/Tutorial/Atlas_Algorithms/Pass_2/@atlas_1d_min/refine_step.m
+END

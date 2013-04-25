@@ -1,0 +1,13 @@
+function [prob atlas cseg] = flush(atlas, prob, cseg)
+
+if cseg.Status==cseg.CurveSegmentOK
+  [atlas cseg] = atlas.merge(cseg);
+end
+[prob atlas cseg] = atlas.flush@AtlasBase(prob, cseg);
+if cseg.Status==cseg.CurveSegmentOK
+  if isempty(atlas.boundary) || (atlas.next_pt>atlas.cont.PtMX)
+    cseg.Status = cseg.BoundaryPoint;
+  end
+end
+
+end

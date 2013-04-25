@@ -1,0 +1,32 @@
+function [prob atlas cseg] = flush(atlas, prob, cseg)
+
+if labindex == 1
+    if cseg.isInitialSegment
+        atlas.flagarray = ones(1, numlabs);
+    else
+        [cseg, src, tag] = labReceive();
+        atlas.flagarray(src) = 1;
+    end
+    
+    if cseg.Status==cseg.CurveSegmentOK
+      [atlas cseg] = atlas.merge(cseg);
+    end
+    [prob atlas cseg] = atlas.flush@AtlasBase(prob, cseg);
+    if cseg.Status==cseg.CurveSegmentOK
+      if isempty(atlas.boundary) || (atlas.next_pt>atlas.cont.PtMX)
+        cseg.Status = cseg.BoundaryPoint;
+      end
+    end
+     [atlas.boundary, atlas.flagarray] = scheduleSend(atlas.boundary, cseg.Status, atlas.flagarray);
+else
+    if ~cseg.isInitialSegment
+        labSend(cseg,1);
+    end
+    dat = labReceive(1);
+          
+    cseg.Status = dat{1}; % stop FSM
+    atlas.boundary = dat{2};
+end
+end
+
+
